@@ -39,8 +39,8 @@
 
    - name: "Rsync {{ apiName }} dockerfile and {{ apiName }} code"
      copy:
-      src: "{{ workSpace }}/docker/Dockerfiles/"
-      dest: /opt/novapointcode/{{ apiName }}/
+      src:"{{ workSpace }}/docker/Dockerfiles"
+      dest:/opt/novapointcode/{{ apiName }}
       register: copied_files
      when: created.changed == true
 
