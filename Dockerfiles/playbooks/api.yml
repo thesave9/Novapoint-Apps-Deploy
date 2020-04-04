@@ -45,9 +45,9 @@
      register: copied_files
      when: created.changed == true
 
-   - name: Check {{ apiName }} container status
+   - name: Check container status
      docker_container_info:
-      name: {{ apiName }}
+      name: "{{ apiName }}"
      register: container_running
    - debug: var=container_running.exists
 
