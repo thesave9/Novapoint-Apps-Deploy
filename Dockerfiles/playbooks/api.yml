@@ -41,8 +41,7 @@
      copy:
       src: "{{ workSpace }}/docker/Dockerfiles"
       dest: /opt/novapointcode/{{ apiName }}
-      recursive: yes
-     register: copied_files
+      register: copied_files
      when: created.changed == true
 
    - name: Check container status
