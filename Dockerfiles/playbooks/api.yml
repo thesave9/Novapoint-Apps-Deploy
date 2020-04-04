@@ -36,16 +36,28 @@
        owner: root
      when: removed_dir.changed == true
      register: created
-
+     
    - name: "Rsync {{ apiName }} dockerfile and {{ apiName }} code"
      copy:
-      src: "{{ workSpace }}/docker/Dockerfiles/"
+      src: {{item}}
       dest: /opt/novapointcode/{{ apiName }}
       mode: 0755
       owner: root
       group: root
+     with_items:
+      ['{{ workSpace }}/docker/Dockerfiles/','{{ workSpace }}/asset-api']
      register: copied_files
      when: created.changed == true
+
+   #- name: "Rsync {{ apiName }} dockerfile and {{ apiName }} code"
+   #  copy:
+   #   src: "{{ workSpace }}/docker/Dockerfiles/"
+   #   dest: /opt/novapointcode/{{ apiName }}
+   #   mode: 0755
+   #   owner: root
+   #   group: root
+   #  register: copied_files
+   #  when: created.changed == true
 
    - name: Check container status
      docker_container_info:
