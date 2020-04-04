@@ -47,7 +47,7 @@
 
    - name: Check container status
      docker_container_info:
-      name: "{{ apiName }}"
+       name: "{{ apiName }}"
      register: container_running
    - debug: var=container_running.exists
 
