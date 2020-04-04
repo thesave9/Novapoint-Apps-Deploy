@@ -1,0 +1,63 @@
+def apiname     = "asset-api"
+
+pipeline
+
+{
+    agent { 
+	
+	 node {
+	      label 'master'
+		 }
+	 }
+
+    parameters{
+        choice(
+            choices:[
+                'dev',
+                'stage',
+                'prod'
+            ],
+            description: '',
+            name: 'ENV'
+        )
+    }
+
+    stages
+    {
+        stage ('git clone')
+			{
+            steps
+				{
+                dir ("asset-api"){
+                    git credentialsId: '6411ac-463312scs-dsdv', url: 'https://github.com/thesave9/asset-api.git'
+                }
+                dir ("dockerfiles"){
+                    git credentialsId: 'gitaccess', url: 'https://github.com/thesave9/Novapoint-Apps-Deplo.git'
+                }
+                }
+            }
+
+        stage ('execute')
+        {
+        steps{
+         dir ("dockerfiles/groupvars"){
+          withCredentials([usernamePassword(credentialsId: 'ubuntu-id', passwordVariable: 'sshPasswd', usernameVariable: 'sshUser')]){
+            writeFile(file: "$ENV", text: "ansible_user: ${sshUser}\r\nansible_become_pass: ${sshPasswd}")
+                }
+            }
+        ansiColor('xterm') {
+         ansiblePlaybook(
+             playbook: 'dockerfiles/playbooks/api.yml',
+             inventory: 'dockerfiles/inventory',
+             credentialsId: 'ubuntu-key',
+             extraVars: [
+                 apiName: "${apiname}",
+                 apiEnv: "${ENV}",
+                 tagName: "${BUILD_NUMBER}"
+             ],
+             colorized: true) 
+            }
+        }
+    }
+}
+}
