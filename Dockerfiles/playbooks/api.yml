@@ -38,7 +38,7 @@
      register: created
 
    - name: "Rsync {{ apiName }} dockerfile and {{ apiName }} code"
-     synchronize:
+     copy:
       src: {{ workSpace }}/docker/
       dest: /opt/novapointcode/{{ apiName }}
       recursive: yes
