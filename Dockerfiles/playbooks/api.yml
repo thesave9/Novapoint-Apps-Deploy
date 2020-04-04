@@ -7,8 +7,6 @@
    become_method: sudo
    become_user: root
 
-   vars_files:
-   - vars/asset.yml
 
    tasks:
    - name: "Log into private {{ apiName }} registry"
