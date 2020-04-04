@@ -45,25 +45,25 @@
      register: copied_files
      when: created.changed == true
 
-   - name: "Check {{ apiName }} container status"
+   - name: Check {{ apiName }} container status
      docker_container_info:
       name: "{{ apiName }}"
      register: container_running
    - debug: var=container_running.exists
 
-   - name: "Stop the existing the {{ apiName }} container"
+   - name: Stop the existing the {{ apiName }} container
      docker_container:
       name: "{{ apiName }}"
       state: stopped
      when: container_running.exists == true
 
-   - name: "Remove the stopped the {{ apiName }} container"
+   - name: Remove the stopped the {{ apiName }} container
      docker_container:
       name: "{{ apiName }}"
       state: absent
      when: container_running.exists == true
 
-   - name: "Build an  {{ apiName }} image and push it to a {{ apiName }} repo"
+   - name: Build an  {{ apiName }} image and push it to a {{ apiName }} repo
      docker_image:
       name: 18.218.154.137:8083/docker-private/{{ apiName }}
       build:
@@ -72,21 +72,21 @@
       state: build
       force: yes
 
-   - name: "Log into private {{ apiName }} registry"
+   - name: Log into private {{ apiName }} registry
      docker_login:
        registry_url: 18.218.154.137:8083
        username: admin
        password: admin123
        reauthorize: yes
 
-   - name: "Docker push to repo"
+   - name: Docker push to repo
      command:  docker push 18.218.154.137:8083/docker-private/{{ apiName }}:{{ tagName }}
      register: push
    - debug: msg="{{ push.stdout }}"
    - debug: msg="{{ push.stderr }}"
 
 
-   - name: "Run the docker {{ apiName }} container"
+   - name: Run the docker {{ apiName }} container
      docker_container:
       name: "{{ apiName }}"
       image: 18.218.154.137:8083/docker-private/{{ apiName }}:{{ tagName }}
