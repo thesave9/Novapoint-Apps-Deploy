@@ -9,7 +9,7 @@
 
 
    tasks:
-   - name: "Log into private {{ apiName }} registry"
+   - name: Log into private {{ apiName }} registry
      docker_login:
        registry_url: 18.218.154.137:8083
        username: admin
@@ -20,14 +20,14 @@
      stat: path=/opt/novapointcode/{{ apiName }}
      register: dir_status
 
-   - name: "Remove if  apiName dockerfile and code dir exists"
+   - name: Remove if  apiName dockerfile and code dir exists
      file:
        path: /opt/novapointcode/{{ apiName }}
        state: absent
      when: dir_status.stat.exists == true
      register: removed_dir
 
-   - name: "Create the {{ apiName }} code dir"
+   - name: Create the {{ apiName }} code dir
      file:
        path: /opt/novapointcode/{{ apiName }}
        state: directory
