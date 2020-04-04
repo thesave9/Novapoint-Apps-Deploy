@@ -39,7 +39,7 @@
      
    - name: "Rsync {{ apiName }} dockerfile and {{ apiName }} code"
      copy:
-      src: {{ item }}
+      src: "{{ item }}"
       dest: /opt/novapointcode/{{ apiName }}
       mode: 0755
       owner: root
