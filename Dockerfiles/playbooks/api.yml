@@ -41,8 +41,10 @@
      copy:
       src: "{{ workSpace }}/docker/Dockerfiles"
       dest: /opt/novapointcode/{{ apiName }}
-      mode: 755
-      register: copied_files
+      mode: 0755
+      owner: root
+      group: root
+     register: copied_files
      when: created.changed == true
 
    - name: Check container status
