@@ -39,7 +39,7 @@
 
    - name: "Rsync {{ apiName }} dockerfile and {{ apiName }} code"
      synchronize:
-      src: vars/
+      src: Dockerfiles/
       dest: /opt/novapointcode/{{ apiName }}
       recursive: yes
      register: copied_files
