@@ -55,7 +55,7 @@
       force: yes
     register: image_build
   - debug:
-     var: image_build.stdout
+     var: image_build.stdout_lines
  
   - name: Run the docker {{ apiName }} container
     docker_container:
