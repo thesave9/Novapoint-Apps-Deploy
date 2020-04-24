@@ -1,6 +1,5 @@
 FROM centos
 RUN yum install httpd -y
 COPY file /opt/
-VOLUME /logs
 EXPOSE 80 443 8080
 CMD ["/usr/sbin/httpd","-D","FOREGROUND"]
