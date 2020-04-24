@@ -60,7 +60,6 @@
       name: "{{ apiName }}"
       image: 18.218.154.137:8083/docker-private/{{ apiName }}:{{ tagName }}
       state: started
-      detach: false
       ports:
         - "9000:9000"
         - "9443:9443"
