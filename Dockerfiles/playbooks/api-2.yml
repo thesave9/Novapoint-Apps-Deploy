@@ -53,6 +53,8 @@
       tag: "{{ tagName }}"
       state: present
       force: yes
+    register: image_build
+    - debug: msg="{{ image_build.stdout }}"
  
   - name: Run the docker {{ apiName }} container
     docker_container:
