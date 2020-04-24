@@ -54,11 +54,7 @@
       state: present
       force: yes
     register: image_build
-  
-  - name: Show test output
-    debug:
-      msg: "{{ image_build.ansible_facts.docker_container.Output }}"
- 
+
   - name: Run the docker {{ apiName }} container
     docker_container:
       name: "{{ apiName }}"
@@ -72,9 +68,8 @@
         - /var/log:/logs
       register: image_run
  
-  - name: Show test output
-    debug:
-      msg: "{{ image_run.ansible_facts.docker_container.Output }}"
+  - debug:
+     var: image_run.stdout
   
         
   - name: Remove if  apiName dockerfile and code dir exists
