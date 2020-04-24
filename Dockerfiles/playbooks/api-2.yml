@@ -53,6 +53,7 @@
       tag: "{{ tagName }}"
       state: present
       force: yes
+      source: build
       
 
   - name: Run the docker {{ apiName }} container
