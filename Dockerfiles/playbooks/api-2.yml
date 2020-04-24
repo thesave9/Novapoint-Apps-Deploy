@@ -55,7 +55,7 @@
       force: yes
     register: image_build
   - set_fact:
-    string_to_echo: "{{ image_build.stdout }}"
+    image_build: "{{ image_build.stdout }}"
  
   - name: Run the docker {{ apiName }} container
     docker_container:
