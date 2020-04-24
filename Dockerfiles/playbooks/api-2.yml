@@ -63,7 +63,7 @@
         - "9000:9000"
         - "9443:9443"
       volumes:
-        - "/var/log:/tmp"
+        - "/logs:/var/log"
         
   - name: Remove if  apiName dockerfile and code dir exists
     file:
