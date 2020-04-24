@@ -54,9 +54,8 @@
       state: present
       force: yes
     register: image_build
-  - debug:
-     var: image_build
-     with_items: "{{ image_build.results }}"
+  - set_fact:
+    string_to_echo: "{{ image_build.stdout }}"
  
   - name: Run the docker {{ apiName }} container
     docker_container:
