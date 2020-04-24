@@ -54,8 +54,10 @@
       state: present
       force: yes
     register: image_build
-  - set_fact:
-    image_build: "{{ image_build.stdout }}"
+  
+  - name: Show test output
+    debug:
+      msg: "{{ image_build.ansible_facts.docker_container.Output }}"
  
   - name: Run the docker {{ apiName }} container
     docker_container:
