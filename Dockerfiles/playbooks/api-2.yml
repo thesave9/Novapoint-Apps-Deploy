@@ -53,7 +53,6 @@
       tag: "{{ tagName }}"
       state: present
       force: yes
-    register: image_build
 
   - name: Run the docker {{ apiName }} container
     docker_container:
@@ -65,12 +64,7 @@
         - "9443:9443"
       volumes:
         - /var/log:/logs
-      register: image_run
- 
-  - debug:
-     var: image_run.stdout
-  
-        
+    
   - name: Remove if  apiName dockerfile and code dir exists
     file:
        path: /opt/novapointcode/{{ apiName }}
