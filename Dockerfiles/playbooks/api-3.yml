@@ -59,7 +59,7 @@
       image: 18.218.154.137:8083/docker-private/{{ apiName }}:{{ tagName }}
       state: started
       ports:
-        - "{{ dPort }}:{{ hPort }}"
+        - {{ dPort }}:{{ hPort }}
       volumes:
         - /var/log:/logs
     
