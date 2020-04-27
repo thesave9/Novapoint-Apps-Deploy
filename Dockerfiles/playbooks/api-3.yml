@@ -51,7 +51,7 @@
       build:
         path: /opt/novapointcode/{{ apiName }}
       tag: "{{ tagName }}"
-      state: present
+      source: build
 
   - name: Run the docker {{ apiName }} container
     docker_container:
