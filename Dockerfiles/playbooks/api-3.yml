@@ -52,7 +52,6 @@
         path: /opt/novapointcode/{{ apiName }}
       tag: "{{ tagName }}"
       state: present
-      force: yes
 
   - name: Run the docker {{ apiName }} container
     docker_container:
